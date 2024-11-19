@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Counter Dashboard</title>
+    <style>
+        body { font-family: Arial, sans-serif; text-align: center; }
+        .counter { font-size: 2em; margin: 20px; }
+    </style>
+    <script>
+        async function fetchCounters() {
+            const response = await fetch('/get_counters');
+            const counters = await response.json();
+            for (const [sensor, value] of Object.entries(counters)) {
+                document.getElementById(sensor).innerText = value;
+            }
+        }
+
+        setInterval(fetchCounters, 1000);
+    </script>
+</head>
+<body>
+    <h1>Counter Dashboard</h1>
+    <div id="counters">
+        <div class="counter">Sensor 1 Count: <span id="sensor1">0</span></div>
+        <div class="counter">Sensor 2 Count: <span id="sensor2">0</span></div>
+        <div class="counter">Sensor 3 Count: <span id="sensor3">0</span></div>
+        <div class="counter">Sensor 4 Count: <span id="sensor4">0</span></div>
+        <div class="counter">Sensor 5 Count: <span id="sensor5">0</span></div>
+    </div>
+</body>
+</html>
